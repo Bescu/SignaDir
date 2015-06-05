@@ -14,13 +14,16 @@
             height: 100%;
             width: 100%;
         }
+		img {
+			height: 250px;
+		}
 		</style>
 	</head>
 	<body>
 		<div id="map"></div>
 		<script type="text/javascript">
-		// function popUp
-		
+		// function popUp			
+				
 		function popUp(e){
 			e.target.openPopup();
 		};
@@ -30,7 +33,7 @@
 		};
 		
 		function onEachFeature(feature, layer){
-			layer.bindPopup(feature.properties.html);
+			layer.bindPopup(feature.properties.html+"<HR></HR><IMG src=img/"+feature.properties.lien_crt+" />", {'minWidth': '330'});
 			layer.on({mouseover: popUp,});
 			layer.on({click: openImg,});
 		};
