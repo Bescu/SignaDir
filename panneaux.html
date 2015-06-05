@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>Leaflet</title>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/lightbox.min.js"></script>
+		<link href="css/lightbox.css" rel="stylesheet" />
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 		<script src="panneaux.geojson"></script>
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -33,7 +36,7 @@
 		};
 		
 		function onEachFeature(feature, layer){
-			layer.bindPopup(feature.properties.html+"<HR></HR><IMG src=img/"+feature.properties.lien_crt+" />", {'minWidth': '330'});
+			layer.bindPopup(feature.properties.html+"<HR></HR><a href='img/"+feature.properties.lien_crt+"' data-lightbox='image-1'><IMG src=img/"+feature.properties.lien_crt+" /></a>", {'minWidth': '330'});
 			layer.on({mouseover: popUp,});
 			layer.on({click: openImg,});
 		};
