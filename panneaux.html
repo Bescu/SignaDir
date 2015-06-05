@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Leaflet</title>
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+		<script src="panneaux.geojson"></script>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		<style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script type="text/javascript">
+		// function popUp
+		
+		function popUp(e){
+			e.target.openPopup();
+		};
+		
+		function openImg(e){
+			window.open("img/"+e.target.feature.properties.lien_crt);
+		};
+		
+		function onEachFeature(feature, layer){
+			layer.bindPopup(feature.properties.html);
+			layer.on({mouseover: popUp,});
+			layer.on({click: openImg,});
+		};
+		
+		// objet carte
+		
+		var map = L.map('map').setView([50.363, 3.52], 16);
+		
+		// fond de plan (ici MapQuest)
+		
+		L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png').addTo(map);
+		
+		// couche panneaux
+		
+		var panneauxLayer = L.geoJson(panneaux, {
+			onEachFeature: onEachFeature,
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng,{opacity:0.8,clickable:true});
+			}
+		}).addTo(map);
+
+		</script>
+    </body>
+</html>
