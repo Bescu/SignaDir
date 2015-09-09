@@ -49,12 +49,18 @@
 		
 		L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png').addTo(map);
 		
+		// icone panneaux
+		
+		var icone = L.icon({
+			iconUrl:'icone.png',
+			iconSize: [25,25]});
+		
 		// couche panneaux
 		
 		var panneauxLayer = L.geoJson(panneaux, {
 			onEachFeature: onEachFeature,
 			pointToLayer: function (feature, latlng) {
-				return L.marker(latlng,{opacity:0.8,clickable:true});
+				return L.marker(latlng,{icon: icone, opacity:0.8,clickable:true});
 			}
 		}).addTo(map);
 
